@@ -184,6 +184,47 @@ pnpm test         # Run tests
 pnpm test:watch   # Run tests in watch mode
 ```
 
+## Deployment
+
+### Deploy on Vercel
+
+1. **Connect Repository**
+   - Connect the `zakaryayev/sublet-calc` repository to Vercel
+   - Framework will auto-detect as Next.js
+   - No special environment variables needed
+
+2. **Verify Deployment**
+   - After deployment, note your Vercel host (e.g., `sublet-calc.vercel.app`)
+   - Test that `/sublet-calculator/` works correctly
+   - Verify health check at `/sublet-calculator/health`
+
+### Cloudflare Worker Proxy
+
+To serve the app at `zakaryayev.com/sublet-calculator`:
+
+1. **Deploy Cloudflare Worker**
+   - Go to Cloudflare Dashboard → Workers & Pages → Create Worker
+   - Copy-paste contents from `cloudflare/worker.js` as a Module worker
+   - Update `backendHost` to your actual Vercel URL
+   - Deploy the worker
+
+2. **Add Routes**
+   - In worker settings → Triggers → Routes, add:
+     - `zakaryayev.com/sublet-calculator*`
+     - `www.zakaryayev.com/sublet-calculator*` (if using www)
+
+3. **DNS Configuration**
+   - Ensure DNS root record is orange-cloud proxied in Cloudflare
+
+For detailed setup instructions, see `cloudflare/README.md`.
+
+### Why basePath?
+
+The `basePath: '/sublet-calculator'` configuration ensures:
+- All assets (`_next/*`) are properly prefixed
+- Internal routing works behind reverse proxy
+- No hardcoded absolute paths break the subpath deployment
+
 ## Browser Support
 
 - Modern browsers with ES2020+ support

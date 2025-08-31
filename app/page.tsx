@@ -30,9 +30,9 @@ const defaultValues: FormData = {
 }
 
 const presets = [
-  { name: '€3500 rent', data: { R: 3500, P: 725, S: 2, K: 1500, N: '', unknown: 'N' as UnknownVariable } },
-  { name: '€4500 rent', data: { R: 4500, P: 725, S: 2, K: 1500, N: '', unknown: 'N' as UnknownVariable } },
-  { name: 'Find P', data: { R: 3500, P: '', S: 2, K: 1500, N: 8, unknown: 'P' as UnknownVariable } },
+  { name: '€3500 rent', data: { R: 3500, P: 725, S: 2, K: 1500, N: '', unknown: 'N' } as FormData },
+  { name: '€4500 rent', data: { R: 4500, P: 725, S: 2, K: 1500, N: '', unknown: 'N' } as FormData },
+  { name: 'Find P', data: { R: 3500, P: '', S: 2, K: 1500, N: 8, unknown: 'P' } as FormData },
 ]
 
 export default function HomePage() {

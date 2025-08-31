@@ -2,23 +2,33 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://zakaryayev.com'),
   title: 'Sublet Profit Calculator',
-  description: 'Calculate rental subletting scenarios by auto-filling unknown variables among rent, price per room, reserved rooms, target profit, and total rooms.',
+  description: 'Calculate subletting profitability with one unknown auto-solved.',
   keywords: 'rental, sublet, profit, calculator, real estate, investment',
   authors: [{ name: 'Sublet Calculator' }],
+  alternates: {
+    canonical: '/sublet-calculator',
+  },
   openGraph: {
     title: 'Sublet Profit Calculator',
-    description: 'Calculate rental subletting scenarios by auto-filling unknown variables among rent, price per room, reserved rooms, target profit, and total rooms.',
+    description: 'Calculate subletting profitability with one unknown auto-solved.',
+    url: '/sublet-calculator',
+    siteName: 'zakaryayev.com',
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary',
     title: 'Sublet Profit Calculator',
-    description: 'Calculate rental subletting scenarios by auto-filling unknown variables among rent, price per room, reserved rooms, target profit, and total rooms.',
+    description: 'Calculate subletting profitability with one unknown auto-solved.',
   },
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({

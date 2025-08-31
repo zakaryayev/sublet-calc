@@ -31,11 +31,11 @@ export type Result = {
   }
 }
 
-export function validateInputs(data: Partial<InputData>): z.SafeParseResult<InputData> {
+export function validateInputs(data: Partial<InputData>) {
   return inputSchema.safeParse(data)
 }
 
-export function solveUnknown(input: Omit<InputData, input['unknown']> & { unknown: UnknownVariable }): Result {
+export function solveUnknown(input: { unknown: UnknownVariable } & Partial<Omit<InputData, 'unknown'>>): Result {
   const { unknown } = input
   let R = input.R ?? 0
   let P = input.P ?? 0
