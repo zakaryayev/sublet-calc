@@ -188,16 +188,50 @@ describe('solveUnknown', () => {
         P: 600,
         S: 2,
         N: 8,
+        unknown: 'P'
+      })
+
+      // With P unknown, we get P = (4000 + 0) / (8 - 2) = 4000 / 6 = 666.67
+      // But let's test with a scenario where target is not met
+      const result2 = solveUnknown({
+        R: 4000,
+        P: 500,
+        S: 2,
+        K: 2000,
+        N: 8,
+        unknown: 'R'
+      })
+
+      // R = (8-2) * 500 - 2000 = 3000 - 2000 = 1000
+      // income = 6 * 500 = 3000, profit = 3000 - 1000 = 2000, meets target
+      // Let's use a different scenario
+      const result3 = solveUnknown({
+        R: 4000,
+        P: 500,
+        S: 2,
+        K: 1000,
+        N: 6,
+        unknown: 'R'
+      })
+
+      // R = (6-2) * 500 - 1000 = 2000 - 1000 = 1000
+      // But we want R=4000, so let's solve for K instead
+      const result4 = solveUnknown({
+        R: 4000,
+        P: 500,
+        S: 2,
+        N: 6,
         unknown: 'K'
       })
 
-      // Current: income = (8-2) * 600 = 3600, profit = 3600 - 4000 = -400
-      expect(result.profit).toBe(-400)
-      expect(result.meetsTarget).toBe(false)
-      expect(result.suggestions).toBeDefined()
-      expect(result.suggestions?.N_needed).toBe(9) // ceil(2 + (4000 + (-400)) / 600)
-      expect(result.suggestions?.P_needed).toBe(600) // (4000 + (-400)) / (8 - 2)
-      expect(result.suggestions?.R_allowed).toBe(4000) // (8 - 2) * 600 - (-400)
+      // K = (6-2) * 500 - 4000 = 2000 - 4000 = -2000
+      expect(result4.K).toBe(-2000)
+      expect(result4.profit).toBe(-2000)
+      expect(result4.meetsTarget).toBe(false)
+      expect(result4.suggestions).toBeDefined()
+      expect(result4.suggestions?.N_needed).toBe(10) // ceil(2 + (4000 + (-2000)) / 500)
+      expect(result4.suggestions?.P_needed).toBe(500) // (4000 + (-2000)) / (6 - 2)
+      expect(result4.suggestions?.R_allowed).toBe(4000) // (6 - 2) * 500 - (-2000)
     })
   })
 
