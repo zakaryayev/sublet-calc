@@ -8,12 +8,13 @@ export const metadata: Metadata = {
   keywords: 'rental, sublet, profit, calculator, real estate, investment',
   authors: [{ name: 'Sublet Calculator' }],
   alternates: {
-    canonical: '/sublet-calculator',
+    // canonical should include the basePath if present
+    canonical: process.env.NEXT_PUBLIC_BASE_PATH || '/',
   },
   openGraph: {
     title: 'Sublet Profit Calculator',
     description: 'Calculate subletting profitability with one unknown auto-solved.',
-    url: '/sublet-calculator',
+    url: process.env.NEXT_PUBLIC_BASE_PATH || '/',
     siteName: 'zakaryayev.com',
     type: 'website',
     locale: 'en_US',

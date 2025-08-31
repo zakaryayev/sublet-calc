@@ -231,6 +231,22 @@ The `basePath: '/sublet-calculator'` configuration ensures:
 - Mobile responsive design
 - Accessible keyboard navigation
 
+# Dual Deploy (path + subdomain)
+
+We deploy TWO Vercel projects from the same repo:
+
+**A) Root under path:**
+- Project name: `sublet-calc-root`
+- Custom Domains: `zakaryayev.com` (Cloudflare Worker proxies `/sublet-calculator*`)
+- Vercel ENV: `NEXT_PUBLIC_BASE_PATH=/sublet-calculator`
+
+**B) Clean subdomain:**
+- Project name: `sublet-calc-sub`
+- Custom Domain: `sublet-calculator.zakaryayev.com`
+- Vercel ENV: `NEXT_PUBLIC_BASE_PATH=` (empty)
+
+Preview domains (`*.vercel.app`) are set to `noindex` via `vercel.json`.
+
 ## License
 
 This project is built for demonstration purposes. Feel free to use and modify as needed.

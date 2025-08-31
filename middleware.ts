@@ -1,26 +1,20 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+// Read the built-time base path value injected in HTML by Next is not available here,
+// so we rely on a runtime fallback using PUBLIC env (Vercel exposes it at runtime).
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export function middleware(req: NextRequest) {
-  // Only redirect the exact root path
-  if (req.nextUrl.pathname === '/' && !req.nextUrl.pathname.startsWith('/sublet-calculator')) {
-    const url = req.nextUrl.clone()
-    url.pathname = '/sublet-calculator'
-    return NextResponse.redirect(url, 307)
+  // Only apply redirect when we actually built with a basePath
+  if (BASE && req.nextUrl.pathname === '/') {
+    const url = req.nextUrl.clone();
+    url.pathname = BASE; // e.g., "/sublet-calculator"
+    return NextResponse.redirect(url);
   }
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - sublet-calculator (our basePath)
-     */
-    '/((?!api|_next/static|_next/image|favicon.ico|sublet-calculator).*)',
-  ]
-}
+  matcher: ['/'],
+};
